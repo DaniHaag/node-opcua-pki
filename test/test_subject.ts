@@ -29,4 +29,12 @@ describe("Subject", () => {
         subject.commonName!.should.eql("Hello");
         subject.domainComponent!.should.eql("MYDOMAIN");
     });
+    it("should parse a long cleaname SubjectLine ", () => {
+
+        const str = "/CN=PC.DOMAIN.COM/sw-machines/scada/server@PC/DC=/O=Sterfive/L=Orleans/C=FR";
+
+        const subject = Subject.parse(str);
+        subject.commonName!.should.eql("PC.DOMAIN.COM/sw-machines/scada/server@PC");
+        subject.domainComponent!.should.eql("");
+    });
 });
